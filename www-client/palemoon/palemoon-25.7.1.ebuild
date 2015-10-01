@@ -1,31 +1,34 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI=5
 
 # For mozlinguas:
-MOZ_LANGS=( af ak ar ast be bg bn-BD bn-IN br bs ca cs cy da de
-el en-GB en-ZA eo es-AR es-CL es-ES es-MX et eu fa fi fr
-fy-NL ga-IE gd gl gu-IN he hi-IN hr hu id is it ja kk kn ko ku
-lg lt lv mai mk ml mr nb-NO nl nn-NO nso or pa-IN pl pt-BR pt-PT rm ro
-ru si sk sl son sq sr sv-SE ta ta-LK te th tr uk vi zh-CN zh-TW zu )
-MOZ_LANGPACK_PREFIX="langpacks/24.x/"
+MOZ_LANGS=( ach af ak ar as ast be bg bn-BD bn-IN br bs ca cs csb cy da de
+el en-GB en-ZA eo es-AR es-CL es-ES es-MX et eu fa ff fi fr fy-NL ga-IE
+gd gl-ES gu-IN he hi-IN hr hu hy-AM id is it ja kk km kn ko ku lg lij lt lv
+mai mk ml mn mr nb-NO nl nn-NO nso or pa-IN pl pt-BR pt-PT rm ro ru si sk sl
+son sq sr sv-SE sw ta ta-LK te th tr uk vi zh-CN zh-TW zu )
+MOZ_LANGPACK_PREFIX="langpacks/25.x/"
 MOZ_FTP_URI="http://relmirror.palemoon.org"
 
 REQUIRED_BUILDSPACE='12G'
 
 inherit palemoon-0 eutils flag-o-matic multilib mozlinguas
 
-KEYWORDS="~amd64"
+KEYWORDS="~x86 ~amd64"
 DESCRIPTION="Pale Moon Web Browser"
 HOMEPAGE="http://www.palemoon.org"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="+official-branding +optimize +system-libs"
+IUSE="+official-branding +optimize system-libs alsa oss"
 
 SRC_URI="${SRC_URI} ftp://source:get@ftp.palemoon.org/${P}-source.7z"
+
+DEPEND="
+	app-arch/p7zip"
 
 RDEPEND="
 	>=dev-lang/perl-5.6
@@ -35,9 +38,9 @@ RDEPEND="
 	>=app-arch/zip-2.3
 	>=media-libs/freetype-2.1.0
 	media-libs/fontconfig
-	>=media-libs/gstreamer-0.10
-	>=media-plugins/gst-plugins-meta-0.10
-	>=dev-util/pkgconf-0.9.0
+	>=media-libs/gstreamer-0.10.25:0.10
+	>=media-libs/gst-plugins-base-0.10:0.10
+	virtual/pkgconfig
 	>=sys-apps/dbus-0.60
 	>=dev-libs/dbus-glib-0.60
 	media-libs/alsa-lib
@@ -49,18 +52,23 @@ RDEPEND="
 		>=sys-libs/glibc-2.4
 	)
 	system-libs? (
-		>=dev-libs/nspr-4.10.2
+		>=dev-libs/nspr-4.10.8
 		dev-libs/libevent
-		>=dev-libs/nss-3.16.2
+		>=dev-libs/nss-3.19
 		virtual/jpeg
 		sys-libs/zlib
 		app-arch/bzip2
-		media-libs/libpng
+		media-libs/libpng[apng]
 		>=media-libs/libvpx-1.0.0
 		>=app-text/hunspell-1.3
 		>=virtual/libffi-3.0.9
-		>=dev-db/sqlite-3.7.17[secure-delete]
+		>=dev-db/sqlite-3.8.11.1[secure-delete]
 	)"
+	# Note: As I'm writing this (2015-08-27) dev-db/sqlite-3.8.11.1 is
+	# still not in the official portage repository, so emerging this with
+	# USE="system-libs" is probably not going to work.
+
+REQUIRED_USE="^^ ( alsa oss )"
 
 src_unpack() {
 	mkdir -p "${S}"
@@ -76,7 +84,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}/${P}-fixversion.patch"
 	# Allow users to apply any additional patches without modifing the ebuild:
 	epatch_user
 
@@ -96,8 +103,11 @@ src_configure() {
 	mozconfig_disable crashreporter accessibility parental-controls \
 		maintenance-service webrtc install-strip
 
+	# Not used and unmaintained. Build fails with them enabled (the default):
+	mozconfig_disable tests
+
 	if use optimize; then
-		mozconfig_enable optimize=\"-O2\" jemalloc replace-malloc shared-js
+		mozconfig_enable optimize=\"-O2\" shared-js
 	else
 		mozconfig_disable optimize
 	fi
@@ -111,6 +121,10 @@ src_configure() {
 		mozconfig_with system-nspr system-libevent system-nss system-jpeg \
 			system-zlib system-bz2 system-png system-libvpx
 		mozconfig_enable system-hunspell system-ffi system-sqlite
+	fi
+
+	if use oss; then
+		mozconfig_enable oss
 	fi
 
 	export MOZBUILD_STATE_PATH="${WORKDIR}/mach_state"
