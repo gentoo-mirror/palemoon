@@ -15,7 +15,7 @@ MOZ_FTP_URI="http://relmirror.palemoon.org"
 
 REQUIRED_BUILDSPACE='12G'
 
-inherit palemoon-0 eutils flag-o-matic multilib mozlinguas
+inherit palemoon-0 eutils flag-o-matic multilib mozlinguas pax-utils
 
 KEYWORDS="~x86 ~amd64"
 DESCRIPTION="Pale Moon Web Browser"
@@ -23,7 +23,7 @@ HOMEPAGE="http://www.palemoon.org"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="+official-branding +optimize system-libs alsa oss"
+IUSE="+official-branding +optimize system-libs alsa oss pulseaudio"
 
 SRC_URI="${SRC_URI} ftp://source:get@ftp.palemoon.org/${P}-source.7z"
 
@@ -51,6 +51,9 @@ RDEPEND="
 	optimize? (
 		>=sys-libs/glibc-2.4
 	)
+	pulseaudio? (
+		media-sound/pulseaudio
+	)
 	system-libs? (
 		>=dev-libs/nspr-4.10.10
 		dev-libs/libevent
@@ -68,7 +71,7 @@ RDEPEND="
 	# still not in the official portage repository, so emerging this with
 	# USE="system-libs" is probably not going to work.
 
-REQUIRED_USE="^^ ( alsa oss )"
+REQUIRED_USE="^^ ( alsa oss pulseaudio )"
 
 src_unpack() {
 	mkdir -p "${S}"
@@ -127,6 +130,10 @@ src_configure() {
 		mozconfig_enable oss
 	fi
 
+	if use pulseaudio; then
+		mozconfig_enable pulseaudio
+	fi
+
 	export MOZBUILD_STATE_PATH="${WORKDIR}/mach_state"
 	mozconfig_var PYTHON $(which python2)
 	mozconfig_var AUTOCONF $(which autoconf-2.13)
@@ -155,6 +162,9 @@ src_install() {
 	local obj_dir="$(echo */config.log)"
 	obj_dir="${obj_dir%/*}"
 
+	# Disable MPROTECT for startup cache creation:
+	pax-mark m "${obj_dir}"/dist/bin/xpcshell
+
 	load_default_prefs
 	set_pref "spellchecker.dictionary_path" "${EPREFIX}/usr/share/myspell"
 
@@ -174,6 +184,10 @@ src_install() {
 	cp -rL "${P}" "${D}/${dest_libdir}"
 	dosym "${dest_libdir}/${P}/${PN}" "/usr/bin/${PN}"
 	einfo "Done installing the package."
+
+	# Until JIT-less builds are supported,
+	# also disable MPROTECT on the main executable:
+	pax-mark m "${D}/${dest_libdir}/${P}/"{palemoon,palemoon-bin,plugin-container}
 
 	# Install language packs:
 	MOZILLA_FIVE_HOME="${dest_libdir}/${P}/browser"
