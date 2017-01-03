@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install postinst postrm preinst prepare pretend setup unpack
+DEPEND=>=sys-apps/sed-4 >=dev-vcs/git-1.8.2.1
+DESCRIPTION=Pale Moon Web Browser
+EAPI=6
+HOMEPAGE=https://www.palemoon.org/
+IUSE=+official-branding -system-libs +optimize shared-js jemalloc -valgrind dbus -necko-wifi +gtk2 -gtk3 +gstreamer -webrtc alsa pulseaudio
+KEYWORDS=~x86 ~amd64
+LICENSE=MPL-2.0 GPL-2 LGPL-2.1
+RDEPEND=>=sys-devel/autoconf-2.13:2.1 >=dev-lang/perl-5.6 x11-libs/libXt app-arch/zip media-libs/freetype media-libs/fontconfig virtual/pkgconfig dev-lang/yasm dev-lang/python:2.7 system-libs? ( dev-libs/libevent media-libs/libjpeg-turbo sys-libs/zlib app-arch/bzip2 media-libs/libwebp media-libs/libpng[apng] app-text/hunspell >=media-libs/libvpx-1.4.0 >=dev-db/sqlite-3.13.0[secure-delete] x11-libs/cairo x11-libs/pixman ) optimize? ( sys-libs/glibc ) valgrind? ( dev-util/valgrind ) shared-js? ( virtual/libffi ) dbus? ( >=sys-apps/dbus-0.60 >=dev-libs/dbus-glib-0.60 ) gtk2? ( >=x11-libs/gtk+-2.18.0:2 ) gtk3? ( >=x11-libs/gtk+-3.4.0:3 ) gstreamer? ( media-libs/gstreamer:1.0 media-libs/gst-plugins-base:1.0 ) alsa? ( media-libs/alsa-lib ) pulseaudio? ( media-sound/pulseaudio ) necko-wifi? ( net-wireless/wireless-tools )
+REQUIRED_USE=jemalloc? ( !valgrind ) ^^ ( gtk2 gtk3 ) ^^ ( alsa pulseaudio ) necko-wifi? ( dbus )
+SLOT=0
+_eclass_exported_funcs=pkg_pretend:- pkg_preinst:- pkg_postrm:- pkg_postinst:- pkg_setup:- src_unpack:- src_prepare:- src_configure:- src_compile:- src_install:-
+_eclasses_=check-reqs	aee25bdf4e2f459af86d17f7c41dcdf6	eutils	b83a2420b796f7c6eff682679d08fe25	fdo-mime	92d07846ea8ea54172f8c0112a47ae3d	flag-o-matic	7366202dd55cb8f018f5d450d54e7749	git-r3	e928b84a9f6f1d9076d1d27687876dc6	gnome2-utils	c6dcdf3a2c22b578b16adb945dc85c35	multilib	165fc17c38d1b11dac2008280dab6e80	palemoon-0	38b38e38d869163caa842faa9183e090	pax-utils	4c2654a34ebe732e85fda354f6ee642f	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	xdg-utils	e2b2bd56125ce8cf59ce30c642b59d48
+_md5_=4651858897c2abb0f68eca5457b84bb2
