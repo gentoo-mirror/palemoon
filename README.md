@@ -1,5 +1,5 @@
 # Unofficial Pale Moon Gentoo Overlay
 
-To add it to your layman overlays: `# layman -a palemoon`
+## Moved to https://github.com/deu/palemoon-overlay
 
-<sub>**Note:** If you are coming from the [old repository](https://gitlab.com/deu/palemoon-overlay) be sure to delete `/etc/layman/overlays/palemoon.xml` before adding the new one.</sub>
+#### Submit your issues there. Keeping this repository open until layman switches to the new one.
