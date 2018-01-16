@@ -1,7 +1,3 @@
-# Copyright 1999-2016 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
-# $Id$
-
 EAPI=6
 
 inherit palemoon-bin-0 eutils pax-utils fdo-mime gnome2-utils
@@ -17,8 +13,8 @@ IUSE="startup-notification"
 BIN_PN="${PN/-bin/}"
 RESTRICT="strip mirror"
 SRC_URI="
-	amd64? ( ftp://archive:get@ftp2.palemoon.org/Pale_Moon/27.x/${PV}/${BIN_PN}-${PV}.en-US.linux-x86_64.tar.bz2 )
-	x86? ( ftp://archive:get@ftp2.palemoon.org/Pale_Moon/27.x/${PV}/${BIN_PN}-${PV}.en-US.linux-i686.tar.bz2 )"
+	amd64? ( https://linux.palemoon.org/datastore/release/${BIN_PN}-${PV}.en-US.linux-x86_64.tar.bz2 )
+	x86? ( https://linux.palemoon.org/datastore/release/${BIN_PN}-${PV}.en-US.linux-i686.tar.bz2 )"
 
 DEPEND="
 	dev-util/patchelf
