@@ -75,7 +75,7 @@ REQUIRED_USE="
 	necko-wifi? ( dbus )
 "
 
-S=${WORKDIR}
+S="${WORKDIR}/${PN}-source"
 
 src_prepare() {
 	# Ensure that our plugins dir is enabled by default:
