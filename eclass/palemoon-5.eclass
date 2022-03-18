@@ -100,7 +100,11 @@ unsupported_compiler_error() {
 ###
 
 mozconfig_init() {
-	echo "ac_add_options --enable-application=palemoon" > "${S}/.mozconfig"
+	if [ "$(printf '%s\n' "30.0.0" "${PV}" | sort -V | head -n1)" = "30.0.0" ]; then
+		echo "ac_add_options --enable-application=browser" > "${S}/.mozconfig"
+	else
+		echo "ac_add_options --enable-application=palemoon" > "${S}/.mozconfig"
+	fi
 }
 
 mozconfig_enable() {
@@ -126,7 +130,11 @@ mozconfig_var() {
 }
 
 set_pref() {
-	echo "pref(\"$1\", $2);" >> "${S}/${obj_dir}/dist/bin/browser/defaults/preferences/palemoon.js"
+	if [ "$(printf '%s\n' "30.0.0" "${PV}" | sort -V | head -n1)" = "30.0.0" ]; then
+		echo "pref(\"$1\", $2);" >> "${S}/${obj_dir}/dist/bin/defaults/pref/palemoon.js"
+	else
+		echo "pref(\"$1\", $2);" >> "${S}/${obj_dir}/dist/bin/browser/defaults/preferences/palemoon.js"
+	fi
 }
 
 
