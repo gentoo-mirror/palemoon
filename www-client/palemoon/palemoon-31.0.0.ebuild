@@ -75,8 +75,6 @@ REQUIRED_USE="
 	necko-wifi? ( dbus )
 "
 
-PATCHES=("${FILESDIR}/${PN}-31.0.0-disable-xz-compression.patch")
-
 src_prepare() {
 	# Ensure that our plugins dir is enabled by default:
 	sed -i -e "s:/usr/lib/mozilla/plugins:/usr/lib/nsbrowser/plugins:" \
@@ -205,13 +203,13 @@ src_install() {
 	python2 "${S}/platform/mach" mozpackage || die
 	local extracted_dir="${T}/package"
 	mkdir -p "${extracted_dir}"
-	cd "${extracted_dir}"
+	cd "${extracted_dir}" || die
 	einfo "Extracting the package..."
-	tar xpf "${S}/${obj_dir}/dist/${P}.linux-${CTARGET_default%%-*}.tar"
+	tar xjpf "${S}/${obj_dir}/dist/${P}.linux-${CTARGET_default%%-*}.tar" || die
 	einfo "Installing the package..."
 	local dest_libdir="/usr/$(get_libdir)"
 	mkdir -p "${D}/${dest_libdir}"
-	cp -rL "${PN}" "${D}/${dest_libdir}"
+	cp -rL "${PN}" "${D}/${dest_libdir}" || die
 	dosym "${dest_libdir}/${PN}/${PN}" "/usr/bin/${PN}"
 	einfo "Done installing the package."
 
