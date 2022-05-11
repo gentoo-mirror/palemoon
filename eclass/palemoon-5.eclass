@@ -130,7 +130,8 @@ mozconfig_var() {
 }
 
 set_pref() {
-	if [ "$(printf '%s\n' "30.0.0" "${PV}" | sort -V | head -n1)" = "30.0.0" ]; then
+	if [ "$(printf '%s\n' "30.0.0" "${PV}" | sort -V | head -n1)" = "30.0.0" \
+	-a "$(printf '%s\n' "31.0.0" "${PV}" | sort -V | head -n1)" != "31.0.0" ]; then
 		echo "pref(\"$1\", $2);" >> "${S}/${obj_dir}/dist/bin/defaults/pref/palemoon.js"
 	else
 		echo "pref(\"$1\", $2);" >> "${S}/${obj_dir}/dist/bin/browser/defaults/preferences/palemoon.js"
