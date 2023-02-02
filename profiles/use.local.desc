@@ -2,12 +2,13 @@
 # Please add your descriptions to your package's metadata.xml ONLY.
 # * generated automatically using pmaint *
 
+www-client/palemoon:av1 - Enable AV1 codec support
 www-client/palemoon:devtools - Enable Mozilla Developer Tools
 www-client/palemoon:gtk2 - Use x11-libs/gtk+:2
 www-client/palemoon:gtk3 - Use x11-libs/gtk+:3
 www-client/palemoon:jemalloc - Replace memory allocator with jemalloc
+www-client/palemoon:jpegxl - Enable JPEG XL support
 www-client/palemoon:necko-wifi - Enable the necko wifi scanner
 www-client/palemoon:official-branding - Enable official branding
 www-client/palemoon:optimize - Enable compiler optimization
-www-client/palemoon:shared-js - Create a shared JavaScript library
 www-client/palemoon:valgrind - Enable Valgrind integration hooks
