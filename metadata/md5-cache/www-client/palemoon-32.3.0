@@ -1,7 +1,8 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=compile configure install postinst postrm preinst prepare pretend setup unpack
-DEPEND=>=sys-devel/autoconf-2.13:2.1 dev-lang/python:2.7 >=dev-lang/perl-5.6 dev-lang/yasm >=dev-vcs/git-1.8.2.1[curl]
+DEPEND=>=sys-devel/autoconf-2.13:2.1 dev-lang/python:2.7 >=dev-lang/perl-5.6 dev-lang/yasm
 DESCRIPTION=Pale Moon Web Browser
-EAPI=6
+EAPI=8
 HOMEPAGE=https://www.palemoon.org/
 INHERIT=palemoon-5 git-r3 flag-o-matic pax-utils
 IUSE=+official-branding +optimize cpu_flags_x86_sse cpu_flags_x86_sse2 threads debug +jemalloc valgrind dbus necko-wifi gtk2 gtk3 pulseaudio +devtools +av1 +jpegxl
@@ -11,5 +12,5 @@ PROPERTIES=live
 RDEPEND=x11-libs/libXt app-arch/zip media-libs/freetype media-libs/fontconfig optimize? ( sys-libs/glibc ) valgrind? ( dev-util/valgrind ) dbus? ( >=sys-apps/dbus-0.60 >=dev-libs/dbus-glib-0.60 ) gtk2? ( >=x11-libs/gtk+-2.18.0:2 ) gtk3? ( >=x11-libs/gtk+-3.4.0:3 ) media-libs/alsa-lib pulseaudio? ( media-sound/pulseaudio ) media-video/ffmpeg[x264] necko-wifi? ( net-wireless/wireless-tools )
 REQUIRED_USE=optimize? ( !debug ) jemalloc? ( !valgrind ) ^^ ( gtk2 gtk3 ) necko-wifi? ( dbus )
 SLOT=0
-_eclasses_=check-reqs	a5f1e025c53d62f98bc24bd63d7d95e1	toolchain-funcs	513c31b3346458ed1f3878b57da6d61c	multilib	c19072c3cd7ac5cb21de013f7e9832e0	xdg-utils	baea6080dd821f5562d715887954c9d3	gnome2-utils	b0183db3b2e07b18f3b77bffec72e116	palemoon-5	5fb764b25f9582e60c92193a3a21f5ea	git-r3	27e13c09a4c7e4c78ac812f74727e676	desktop	021728fdc1b03b36357dbc89489e0f0d	edos2unix	33e347e171066657f91f8b0c72ec8773	estack	c61c368a76fdf3a82fdf8dbaebea3804	epatch	2b02655f061dfa25067b543539110259	eqawarn	c9847c43b3253a276ae2eabddedab3d7	ltprune	97143780d341cc8d8f1d4c6187a36d29	preserve-libs	21162ec96c87041004a75348d97342dd	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	vcs-clean	d271b7bc7e6a009758d7d4ef749174e3	wrapper	4a1902f969e5718126434fc35f3a0d9c	eutils	8f942ebdcf04334697649d4a0bf65a32	flag-o-matic	ad475baa777c9978fa035216c8264a10	pax-utils	91d47e5d20627c717aa878b9167c62a8
-_md5_=1b1193640833384e3a7f5b4603a5413d
+_eclasses_=check-reqs	a5f1e025c53d62f98bc24bd63d7d95e1	toolchain-funcs	513c31b3346458ed1f3878b57da6d61c	multilib	c19072c3cd7ac5cb21de013f7e9832e0	xdg-utils	baea6080dd821f5562d715887954c9d3	gnome2-utils	b0183db3b2e07b18f3b77bffec72e116	desktop	021728fdc1b03b36357dbc89489e0f0d	palemoon-5	ca20346ed9c7dd5c71c0d9928befb870	git-r3	27e13c09a4c7e4c78ac812f74727e676	flag-o-matic	ad475baa777c9978fa035216c8264a10	pax-utils	91d47e5d20627c717aa878b9167c62a8
+_md5_=92fc1de8c5b923ce4800d1a692dcdc0e
