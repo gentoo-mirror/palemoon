@@ -1,0 +1,16 @@
+DEFINED_PHASES=install postinst postrm preinst unpack
+DEPEND=dev-util/patchelf
+DESCRIPTION=Pale Moon Web Browser
+EAPI=6
+HOMEPAGE=https://www.palemoon.org/
+INHERIT=palemoon-bin-0 pax-utils desktop
+IUSE=gtk2 gtk3 startup-notification
+KEYWORDS=-* amd64
+LICENSE=MPL-2.0 GPL-2 LGPL-2.1
+RDEPEND=dev-libs/atk >=sys-apps/dbus-0.60 >=dev-libs/dbus-glib-0.60 media-libs/alsa-lib media-libs/fontconfig >=media-libs/freetype-2.1.0 x11-libs/cairo x11-libs/gdk-pixbuf gtk2? ( >=x11-libs/gtk+-2.24:2 ) gtk3? ( >=x11-libs/gtk+-3.22:3 ) x11-libs/libX11 x11-libs/libXcomposite x11-libs/libXdamage x11-libs/libXext x11-libs/libXfixes x11-libs/libXrender x11-libs/libXt x11-libs/pango virtual/freedesktop-icon-theme media-video/ffmpeg[x264]
+REQUIRED_USE=^^ ( gtk2 gtk3 )
+RESTRICT=strip mirror
+SLOT=0
+SRC_URI=gtk2? ( http://rm-us.palemoon.org/release/palemoon-32.4.0.1.linux-x86_64-gtk2.tar.xz ) gtk3? ( http://rm-us.palemoon.org/release/palemoon-32.4.0.1.linux-x86_64-gtk3.tar.xz )
+_eclasses_=toolchain-funcs	862d337d98edb576796827be2c6b11ca	multilib	c19072c3cd7ac5cb21de013f7e9832e0	xdg-utils	baea6080dd821f5562d715887954c9d3	gnome2-utils	b0183db3b2e07b18f3b77bffec72e116	palemoon-bin-0	d9dfae06509f7f6ed199cefffbc2665d	pax-utils	91d47e5d20627c717aa878b9167c62a8	desktop	021728fdc1b03b36357dbc89489e0f0d
+_md5_=6cc6e63a0f80e5ba62f3d7cd5135aeff
