@@ -12,5 +12,5 @@ REQUIRED_USE=^^ ( gtk2 gtk3 )
 RESTRICT=strip mirror
 SLOT=0
 SRC_URI=gtk2? ( http://rm-us.palemoon.org/release/palemoon-32.4.0.linux-x86_64-gtk2.tar.xz ) gtk3? ( http://rm-us.palemoon.org/release/palemoon-32.4.0.linux-x86_64-gtk3.tar.xz )
-_eclasses_=toolchain-funcs	862d337d98edb576796827be2c6b11ca	multilib	c19072c3cd7ac5cb21de013f7e9832e0	xdg-utils	baea6080dd821f5562d715887954c9d3	gnome2-utils	b0183db3b2e07b18f3b77bffec72e116	palemoon-bin-0	d9dfae06509f7f6ed199cefffbc2665d	pax-utils	91d47e5d20627c717aa878b9167c62a8	desktop	021728fdc1b03b36357dbc89489e0f0d
+_eclasses_=toolchain-funcs	fbbbc99d10168de2926e06da7169b8dc	multilib	c19072c3cd7ac5cb21de013f7e9832e0	xdg-utils	baea6080dd821f5562d715887954c9d3	gnome2-utils	b0183db3b2e07b18f3b77bffec72e116	palemoon-bin-0	d9dfae06509f7f6ed199cefffbc2665d	pax-utils	91d47e5d20627c717aa878b9167c62a8	desktop	021728fdc1b03b36357dbc89489e0f0d
 _md5_=6cc6e63a0f80e5ba62f3d7cd5135aeff
