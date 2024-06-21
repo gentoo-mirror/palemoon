@@ -1,6 +1,6 @@
 EAPI=6
 
-inherit palemoon-bin-0 eutils pax-utils gnome2-utils xdg-utils
+inherit palemoon-bin-0 pax-utils desktop
 
 KEYWORDS="-* amd64"
 DESCRIPTION="Pale Moon Web Browser"
@@ -14,8 +14,8 @@ REQUIRED_USE="^^ ( gtk2 gtk3 )"
 BIN_PN="${PN/-bin/}"
 RESTRICT="strip mirror"
 SRC_URI="
-	gtk2? ( https://archive.palemoon.org/${BIN_PN}/31.x/${PV}/${BIN_PN}-${PV}.linux-x86_64-gtk2.tar.xz )
-	gtk3? ( https://archive.palemoon.org/${BIN_PN}/31.x/${PV}/${BIN_PN}-${PV}.linux-x86_64-gtk3.tar.xz )
+	gtk2? ( http://rm-us.palemoon.org/release/${BIN_PN}-${PV}.linux-x86_64-gtk2.tar.xz )
+	gtk3? ( http://rm-us.palemoon.org/release/${BIN_PN}-${PV}.linux-x86_64-gtk3.tar.xz )
 "
 
 DEPEND="
@@ -109,7 +109,7 @@ src_install() {
 
 	# revdep-rebuild entry:
 	insinto /etc/revdep-rebuild
-	echo "SEARCH_DIRS_MASK=${PALEMOON_INSTDIR}" >> ${T}/10${PN}
+	echo "SEARCH_DIRS_MASK=${PALEMOON_INSTDIR}" >> "${T}/10${PN}"
 	doins "${T}"/10${PN} || die
 
 	# Plugins dir:
